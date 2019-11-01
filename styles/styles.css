@@ -32,6 +32,11 @@ body {
     background-color: blanchedalmond;
 }
 
-.col.hidden.bomb {
-    background-color: red;
+.fa.fa-bomb {
+    display: none;
+}
+
+.fa.fa-bomb.show-bomb {
+    color: red;
+    display: block;
 }

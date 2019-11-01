@@ -1,6 +1,7 @@
 let square = document.getElementById('wrapper');
 const ROWS = 10;
 const COLS = 10;
+let mineIcon;
 
 function makeSquare(rows, cols) {
     for (let i = 0; i < rows; i++) {
@@ -13,6 +14,12 @@ function makeSquare(rows, cols) {
             col.setAttribute('row', i);
             if (Math.random() < 0.2) {
                 col.className = 'col hidden bomb';
+                let mineIcon = document.createElement("I");
+                mineIcon.className = 'fa fa-bomb fa-2x';
+                col.appendChild(mineIcon);
+
+
+
             }
 
             row.appendChild(col);
@@ -34,12 +41,19 @@ function gameOver(isWin) {
     } else {
         message = 'YOU LOST';
     }
-    alert(message);
 
-    const gameWrapper = document.getElementById('wrapper');
-    gameWrapper.innerHTML = '';
+    let list;
+    list = document.querySelectorAll("I");
+    for (var i = 0; i < list.length; ++i) {
+        list[i].classList.add('show-bomb');
+    }
 
-    makeSquare(10, 10);
+    setTimeout(function() {
+        alert(message);
+        const gameWrapper = document.getElementById('wrapper');
+        gameWrapper.innerHTML = '';
+        makeSquare(10, 10);
+    }, 2000);
 }
 
 function reveal(cell) {
