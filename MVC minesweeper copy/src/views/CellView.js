@@ -8,7 +8,7 @@ export default class CellView {
         div.classList.add('cell');
         document.body.appendChild(div);
         const innerDiv = document.createElement('div');
-        innerDiv.classList.add('innerDiv')
+        innerDiv.classList.add('innerDiv');
         div.appendChild(innerDiv);
 
         return div;

@@ -1,39 +1,35 @@
 import BoardController from './BoardController.js';
 import CellController from './CellController.js';
+import GameView from '../views/GameView.js';
 
 export default class GameController {
     constructor(size, mineCount) {
         this.size = size;
         this.mineCount = mineCount;
         this.createLevel();
+        this.view = new GameView();
+        this.createBut();
     }
 
-    begginerLevel() {
-        const board = new BoardController(10, 10);
-    }
-
-    mediumLevel() {
-        const board = new BoardController(15, 15);
-    }
-
-    expertLevel() {
-        const board = new BoardController(20, 20);
+    createBoard(size, count) {
+        const board = new BoardController(size, count);
     }
 
     createLevel() {
         let beginner = document.createElement('button');
         let medium = document.createElement('button');
         let expert = document.createElement('button');
+
         const callbackBeginner = () => {
-            this.begginerLevel();
+            // document.body.innerHTML = ''
+            this.createBoard(10, 10);
         }
         const callbackMedium = () => {
-            this.mediumLevel();
+            this.createBoard(15, 15);
 
         }
         const callbackExpert = () => {
-
-            this.expertLevel();
+            this.createBoard(15, 15);
         }
 
 
@@ -47,6 +43,43 @@ export default class GameController {
         medium.innerText = 'Medium';
         expert.innerText = 'Expert'
 
+        //  { easy: { size: 14, mineCount: 15 } }, { medium: { size: 15, mineCount: 20 } }
+
+    }
+
+    createBut() {
+        let butLevel = ['easy', 'medium', 'hard'];
+        butLevel.forEach((el) => {
+            this.view.createButton(el, this.handleClick);
+        });
+    }
+
+    handleClick = (ev) => {
+        console.log(ev.target.id);
+
+        const difficulty = ev.target.id;
+        this.onSelectDifficulty(difficulty);
+    }
+
+
+
+    onSelectDifficulty(nameDifficulty) {
+        switch (nameDifficulty) {
+            case 'easy':
+                document.body.innerHTML = '';
+                this.createBoard(10, 10)
+                break;
+            case 'medium':
+                document.body.innerHTML = '';
+                this.createBoard(15, 15)
+                break;
+            case 'hard':
+                document.body.innerHTML = '';
+                this.createBoard(18, 18)
+                break;
+            default:
+                console.log('Sorry');
+        }
     }
 
 }
